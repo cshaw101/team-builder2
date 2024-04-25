@@ -22,6 +22,11 @@ I enjoy bringing creativity and aesthetics to the digital world."
 export default function App() {
   const [members, setMembers] = useState(teamMembers)
   const [editing, setEditing] = useState(null)
+  const [inputValues, setInputValues] = useState({
+    fname: '',
+    lname: '',
+    bio: ''
+  })
   // ✨ Create a third state to track the values of the inputs
 
   useEffect(() => {
