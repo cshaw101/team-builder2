@@ -18,15 +18,16 @@ I love creating intuitive and visually appealing web interfaces."
 I enjoy bringing creativity and aesthetics to the digital world."
   },
 ]
+const initialValues = {
+fname: '',
+    lname: '',
+    bio: ''
+}
 
 export default function App() {
   const [members, setMembers] = useState(teamMembers)
   const [editing, setEditing] = useState(null)
-  const [inputValues, setInputValues] = useState({
-    fname: '',
-    lname: '',
-    bio: ''
-  })
+  const [inputValues, setInputValues] = useState(initialValues)
   // ✨ Create a third state to track the values of the inputs
 
   useEffect(() => {
@@ -38,14 +39,20 @@ export default function App() {
   }, [editing])
 
   const onChange = evt => {
+   const { name, value } = evt.target
     // ✨ This is the change handler for your text inputs and your textarea.
     // You can check `evt.target.id` to know which input changed
     // and then you can use `evt.target.value` to update the state of the form
+setInputValues({
+  ...inputValues,
+  [name]: value
+})
   }
   const edit = id => {
     // ✨ Put this function inside a click handler for the <button>Edit</button>.
     // It should change the value of `editing` state to be the id of the member
     // whose Edit button was clicked
+
   }
   const submitNewMember = () => {
     // This takes the values of the form and constructs a new member object,
@@ -85,17 +92,17 @@ export default function App() {
         <form>
           <div>
             <label htmlFor="fname">First Name </label>
-            <input id="fname" type="text" placeholder="Type First Name" />
+            <input onChange={onChange} id="fname" type="text" placeholder="Type First Name" />
           </div>
 
           <div>
             <label htmlFor="lname">Last Name </label>
-            <input id="lname" type="text" placeholder="Type Last Name" />
+            <input onChange={onChange} id="lname" type="text" placeholder="Type Last Name" />
           </div>
 
           <div>
             <label htmlFor="bio">Bio </label>
-            <textarea id="bio" placeholder="Type Bio" />
+            <textarea onChange={onChange} id="bio" placeholder="Type Bio" />
           </div>
 
           <div>
